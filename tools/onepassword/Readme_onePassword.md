@@ -14,7 +14,7 @@ in your own project's task file, you can utilize this onepassword libary:
 version: '3'
 
 includes:
-  op: https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/main/tools/onepassword_{{OS}}.yaml # This is the remote taskfile in the git repo
+  op: https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/main/tools/onepassword/onepassword_{{OS}}.yaml # This is the remote taskfile in the git repo
 
 dotenv: ["secrets/helm-config.env"]
 
