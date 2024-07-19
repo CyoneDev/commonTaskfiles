@@ -1,0 +1,34 @@
+version: '3'
+
+tasks:
+  install-scoop:
+    desc: "Install Scoop package manager"
+    cmds:
+      - cmd: "pwsh -command \"Set-ExecutionPolicy RemoteSigned -scope CurrentUser -Force\""
+      - cmd: "pwsh -Command \"iwr -useb get.scoop.sh | iex\""
+    silent: false
+    status: 
+    - "scoop --version"
+
+  update-scoop:
+    desc: "Update Scoop"
+    cmds:
+      - cmd: "pwsh -Command \"scoop update\""
+    depends_on: ["install-scoop"]
+    silent: true
+
+  add-buckets:
+    desc: "Add Scoop buckets"
+    cmds:
+      - cmd: "scoop bucket add main"
+      - cmd: "scoop bucket add extras"
+    depends_on: ["install-scoop"]
+    silent: true
+
+  default:
+    desc: "Install and validate Scoop"
+    cmds:
+      - task: "install-scoop"
+      - task: "add-buckets"
+      - task: "update-scoop"
+

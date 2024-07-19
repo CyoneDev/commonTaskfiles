@@ -1,0 +1,39 @@
+version: '3'
+
+vars:
+  LINUX_DISTRO: 
+    sh: |
+      if [ "{{OS}}" = "linux" ]; then
+        source /etc/os-release && echo $ID
+      fi
+
+tasks: 
+  install-pwsh:
+    cmds:
+      - task: install-pwsh-linux
+        silent: true
+      - task: install-pwsh-windows
+        silent: true
+    desc: "Install PowerShell on Ubuntu, Red Hat, and Windows"
+    status:
+      - command -v pwsh
+
+  install-pwsh-linux:
+    cmds:
+      - sudo curl https://raw.githubusercontent.com/PowerShell/PowerShell/master/tools/install-powershell.sh | sudo bash
+    desc: "Install PowerShell on Linux"
+    interactive: true
+    platforms: [linux]
+
+  install-pwsh-windows:
+    cmds:
+      - |
+        powershell -c '
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+        $latestRelease = Invoke-RestMethod -Uri "https://api.github.com/repos/PowerShell/PowerShell/releases/latest"
+        $msiUrl = $latestRelease.assets | Where-Object { $_.name -match "win-x64.msi`$" } | Select-Object -ExpandProperty browser_download_url
+        Invoke-WebRequest -Uri $msiUrl -OutFile "$env:TEMP\PowerShell-latest-win-x64.msi"
+        Start-Process -Wait -FilePath "msiexec.exe" -ArgumentList "/i", "$env:TEMP\PowerShell-latest-win-x64.msi", "/quiet", "/norestart"
+        '
+    desc: "Install PowerShell on Windows"
+    platforms: [windows]

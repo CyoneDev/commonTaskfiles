@@ -1,0 +1,16 @@
+version: '3'
+
+vars:
+  LINUX_DISTRO: 
+    sh: |
+      if [ "{{OS}}" = "linux" ]; then
+        source /etc/os-release && echo $ID
+      fi
+
+tasks: 
+  demo-distro-usage:
+    cmds:
+    - cmd: echo '{{.LINUX_DISTRO}}'
+      platforms: [linux]
+    - cmd: echo 'Windows'
+      platforms: [windows]
