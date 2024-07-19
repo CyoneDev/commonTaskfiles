@@ -1,3 +1,8 @@
+## how to use
+ - set OP_SERVICE_ACCOUNT environment variable ($ENV:OP_SERVICE_ACCOUNT on pwsh)
+ - Run ` task -t https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/main/tools/onepassword/onepassword_windows.yaml inject-secrets DIR="./secrets"
+`
+
 ## Using this
 in your own project's task file, you can utilize this onepassword libary:
 - add an 'includes' to the git remote 
