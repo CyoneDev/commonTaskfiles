@@ -1,0 +1,32 @@
+version: '3'
+
+vars:
+  LINUX_DISTRO: 
+    sh: |
+      if [ "{{OS}}" = "linux" ]; then
+        source /etc/os-release && echo $ID
+      fi
+
+tasks: 
+  install:
+    cmds:
+      - task: install-helm-linux
+        silent: true
+      - task: install-helm-windows
+        silent: true
+    desc: "Install Helm on Ubuntu, Red Hat, and Windows"
+    status:
+      - command -v helm
+
+  install-helm-linux:
+    cmds:
+      - curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+    desc: "Install Helm on Linux (Ubuntu, Red Hat, CentOS)"
+    interactive: true
+    platforms: [linux]
+
+  install-git-windows:
+    cmds:
+      - scoop install helm
+    desc: "Install Helm on Windows"
+    platforms: [windows]
