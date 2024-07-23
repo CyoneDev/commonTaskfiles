@@ -21,10 +21,10 @@ tasks:
   install-git-linux:
     cmds:
       - |
-        if [ "{{LINUX_DISTRO}}" = "ubuntu" ]; then
+        if [ "{{.LINUX_DISTRO}}" = "ubuntu" ]; then
           sudo apt-get update
           sudo apt-get install -y git
-        elif [ "{{LINUX_DISTRO}}" = "rhel" ] || [ "{{LINUX_DISTRO}}" = "centos" ]; then
+        elif [ "{{.LINUX_DISTRO}}" = "rhel" ] || [ "{{.LINUX_DISTRO}}" = "centos" ]; then
           sudo yum install -y git
         fi
     desc: "Install Git on Linux (Ubuntu, Red Hat, CentOS)"
