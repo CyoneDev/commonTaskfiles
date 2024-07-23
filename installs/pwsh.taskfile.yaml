@@ -8,7 +8,7 @@ vars:
       fi
 
 tasks: 
-  install-pwsh:
+  install:
     cmds:
       - task: install-pwsh-linux
         silent: true

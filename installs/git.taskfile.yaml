@@ -8,7 +8,7 @@ vars:
       fi
 
 tasks: 
-  install-git:
+  install:
     cmds:
       - task: install-git-linux
         silent: true

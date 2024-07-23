@@ -1,7 +1,7 @@
 version: '3'
 
 tasks:
-  install-scoop:
+  install:
     desc: "Install Scoop package manager"
     cmds:
       - cmd: "pwsh -command \"Set-ExecutionPolicy RemoteSigned -scope CurrentUser -Force\""
