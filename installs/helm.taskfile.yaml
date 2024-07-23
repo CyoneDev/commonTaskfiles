@@ -25,7 +25,7 @@ tasks:
     interactive: true
     platforms: [linux]
 
-  install-git-windows:
+  install-helm-windows:
     cmds:
       - scoop install helm
     desc: "Install Helm on Windows"
