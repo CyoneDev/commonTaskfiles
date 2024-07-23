@@ -1,8 +1,5 @@
 version: '3'
 
-includes: 
-  pwsh: https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/main/installs/pwsh.taskfile.yaml
-
 vars:
   LINUX_DISTRO: 
     sh: |
@@ -12,7 +9,6 @@ vars:
 
 tasks: 
   install-git:
-    deps: [pwsh:install-pwsh]
     cmds:
       - task: install-git-linux
         silent: true
@@ -25,10 +21,10 @@ tasks:
   install-git-linux:
     cmds:
       - |
-        if [ "$(source /etc/os-release && echo $ID)" = "ubuntu" ]; then
+        if [ "{{LINUX_DISTRO}}" = "ubuntu" ]; then
           sudo apt-get update
           sudo apt-get install -y git
-        elif [ "$(source /etc/os-release && echo $ID)" = "rhel" ] || [ "$(source /etc/os-release && echo $ID)" = "centos" ]; then
+        elif [ "{{LINUX_DISTRO}}" = "rhel" ] || [ "{{LINUX_DISTRO}}" = "centos" ]; then
           sudo yum install -y git
         fi
     desc: "Install Git on Linux (Ubuntu, Red Hat, CentOS)"
