@@ -22,7 +22,7 @@ tasks:
     cmds:
       - sudo curl https://raw.githubusercontent.com/PowerShell/PowerShell/master/tools/install-powershell.sh | sudo bash
     desc: "Install PowerShell on Linux"
-    interactive: true
+    internal: true
     platforms: [linux]
 
   install-pwsh-windows:
@@ -35,5 +35,6 @@ tasks:
         Invoke-WebRequest -Uri $msiUrl -OutFile "$env:TEMP\PowerShell-latest-win-x64.msi"
         Start-Process -Wait -FilePath "msiexec.exe" -ArgumentList "/i", "$env:TEMP\PowerShell-latest-win-x64.msi", "/quiet", "/norestart"
         '
+    internal: true
     desc: "Install PowerShell on Windows"
     platforms: [windows]

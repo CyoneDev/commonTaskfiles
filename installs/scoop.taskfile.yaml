@@ -2,6 +2,14 @@ version: '3'
 
 tasks:
   install:
+    desc: "Install and validate Scoop"
+    cmds:
+      - task: "install-scoop"
+      - task: "add-buckets"
+      - task: "update-scoop"
+
+  install-scoop:
+    internal: true
     desc: "Install Scoop package manager"
     cmds:
       - cmd: "pwsh -command \"Set-ExecutionPolicy RemoteSigned -scope CurrentUser -Force\""
@@ -12,12 +20,14 @@ tasks:
 
   update-scoop:
     desc: "Update Scoop"
+    internal: true
     cmds:
       - cmd: "pwsh -Command \"scoop update\""
     depends_on: ["install-scoop"]
     silent: true
 
   add-buckets:
+    internal: true
     desc: "Add Scoop buckets"
     cmds:
       - cmd: "scoop bucket add main"
@@ -25,10 +35,5 @@ tasks:
     depends_on: ["install-scoop"]
     silent: true
 
-  default:
-    desc: "Install and validate Scoop"
-    cmds:
-      - task: "install-scoop"
-      - task: "add-buckets"
-      - task: "update-scoop"
+
 

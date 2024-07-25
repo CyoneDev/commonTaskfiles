@@ -30,6 +30,7 @@ tasks:
     desc: "Install Git on Linux (Ubuntu, Red Hat, CentOS)"
     interactive: true
     platforms: [linux]
+    internal: true
 
   install-git-windows:
     cmds:
@@ -43,3 +44,4 @@ tasks:
         '
     desc: "Install Git on Windows"
     platforms: [windows]
+    internal: true

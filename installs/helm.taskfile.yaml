@@ -23,9 +23,11 @@ tasks:
       - curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
     desc: "Install Helm on Linux (Ubuntu, Red Hat, CentOS)"
     platforms: [linux]
+    internal: true
 
   install-helm-windows:
     cmds:
       - scoop install helm
     desc: "Install Helm on Windows"
     platforms: [windows]
+    internal: true
