@@ -32,7 +32,9 @@ tasks:
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
         $latestRelease = Invoke-RestMethod -Uri "https://api.github.com/repos/PowerShell/PowerShell/releases/latest"
         $msiUrl = $latestRelease.assets | Where-Object { $_.name -match "win-x64.msi`$" } | Select-Object -ExpandProperty browser_download_url
+        if(-not (test-path $env:TEMP\PowerShell-latest-win-x64.msi)){
         Invoke-WebRequest -Uri $msiUrl -OutFile "$env:TEMP\PowerShell-latest-win-x64.msi"
+        }
         Start-Process -Wait -FilePath "msiexec.exe" -ArgumentList "/i", "$env:TEMP\PowerShell-latest-win-x64.msi", "/quiet", "/norestart"
         '
     internal: true
