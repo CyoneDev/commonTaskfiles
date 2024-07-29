@@ -9,7 +9,7 @@ process{
 #basically i'm using the azure keyvault login process to authenticate that the user should have the key
 
 # Ensure the Az.KeyVault module is installed
-if (-not (Get-Module -ListAvailable -Name Az.KeyVault)) {
+if(-not (Get-Module -ListAvailable -Name Az.KeyVault).Name -eq "Az.KeyVault"){
     Write-Output "Installing Az.KeyVault module..."
     Install-Module -Name Az.KeyVault -AllowClobber -Scope CurrentUser -force 
 }
