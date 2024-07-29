@@ -37,7 +37,7 @@ tasks:
         Invoke-WebRequest -Uri $msiUrl -OutFile "$env:TEMP\PowerShell-latest-win-x64.msi"
         }
         Start-Process -Wait -FilePath "msiexec.exe" -ArgumentList "/i", "$env:TEMP\PowerShell-latest-win-x64.msi", "/passive", "/norestart", "ADD_EXPLORER_CONTEXT_MENU_OPENPOWERSHELL=1", "ADD_FILE_CONTEXT_MENU_RUNPOWERSHELL=1", "ENABLE_PSREMOTING=1", "REGISTER_MANIFEST=1", "USE_MU=1", "ENABLE_MU=1", "ADD_PATH=1"
-        $env:PATH = [System.Environment]::GetEnvironmentVariable("Path", [System.EnvironmentVariableTarget]::Machine) + ";" + [System.Environment]::GetEnvironmentVariable("Path", [System.EnvironmentVariableTarget]::User)
+        scoop shim add pwsh $ENV:ProgramFiles\Powershell\7\pwsh.exe
         '
     internal: true
     desc: "Install PowerShell on Windows"
