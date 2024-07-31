@@ -9,16 +9,15 @@ process{
 #basically i'm using the azure keyvault login process to authenticate that the user should have the key
 
 # Ensure the Az.KeyVault module is installed
-if(-not (Get-Module -ListAvailable -Name Az.KeyVault).Name -eq "Az.KeyVault"){
-    Write-Output "Installing Az.KeyVault module..."
-    Install-Module -Name Az.KeyVault -AllowClobber -Scope CurrentUser -force 
-}
+Set-PSRepository -Name PSGallery -InstallationPolicy Trusted 
+install-module -Name Az.KeyVault -AllowClobber -Scope CurrentUser -MinimumVersion 6.0.1 -AcceptLicense -Force
+install-module -Name Az.Accounts -AllowClobber -Scope CurrentUser -MinimumVersion 3.0.2 -AcceptLicense -Force
 
 # Authenticate to Azure if not already authenticated
 $azureContexts = Get-AzContext -ListAvailable  
 if ($null -eq $azureContexts -or $azureContexts.Count -eq 0) {
     Write-Output "No Azure contexts available. Initiating login..."
-    Update-AzConfig -EnableLoginByWam $true -DefaultSubscriptionForLogin $AZ_SUBSCRIPTION_ID
+    Update-AzConfig -EnableLoginByWam $true -DefaultSubscriptionForLogin $AZ_SUBSCRIPTION_ID | Out-Null
     Connect-AzAccount -UseDeviceAuthentication
 } else {
     $currentContext = Get-AzContext
