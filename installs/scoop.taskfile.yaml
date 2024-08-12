@@ -2,7 +2,7 @@ version: '3'
 
 tasks:
   install:
-    desc: "Install and validate Scoop"
+    desc: "Install and validate Scoop; If already installed, then update."
     cmds:
       - task: "install-scoop"
       - task: "add-buckets"
