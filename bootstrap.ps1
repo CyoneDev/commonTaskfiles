@@ -20,21 +20,17 @@ task -t https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/refs/heads/ma
 task -t https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/refs/heads/main/installs/pwsh.taskfile.yaml -y install
 #install docker desktop
 if( -not(get-command dockerd)){
-invoke-expression $(curl https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/refs/heads/main/scripts/install-docker-desktop_win.ps1 | select -expand content)
+invoke-expression -command $(invoke-webrequest https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/refs/heads/main/scripts/install-docker-desktop_win.ps1)
 }
 #kind
 if(-not (get-command kind -erroraction silentlycontinue)){scoop install kind}
-#onepass op cli
+#kluctl
+if(-not (get-command kluctl -erroraction silentlycontinue)){
+Invoke-Expression -Command $(Invoke-WebRequest https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/refs/heads/main/scripts/install-kluctl.ps1)
+}
+#onepassword
 task -t https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/main/tools/onepassword/onepassword_windows.yaml install -y
+#kubectl
+scoop install kubectl
 
 Write-Host "You should now run: `n`tgit clone https://github.com/CyoneDev/iac-k8s-aks.git`nGo to that directory and run`n`ttask kind:init:dev"
-
- 
-
-
-#kluctl
-  #kluctl
-  #kind
-  #wisrd
-    #wisrdlicense
-    
