@@ -32,5 +32,6 @@ Invoke-Expression -Command $(Invoke-WebRequest https://raw.githubusercontent.com
 task -t https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/main/tools/onepassword/onepassword_windows.yaml install -y
 #kubectl
 scoop install kubectl
+Invoke-Expression -Command $(Invoke-WebRequest https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/refs/heads/main/scripts/Refresh-EnvironmentVariables.ps1)
 
 Write-Host "You should now run: `n`tgit clone https://github.com/CyoneDev/iac-k8s-aks.git`nGo to that directory and run`n`ttask kind:init:dev"
