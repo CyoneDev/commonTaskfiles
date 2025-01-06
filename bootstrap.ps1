@@ -24,7 +24,7 @@ invoke-expression $(curl https://raw.githubusercontent.com/CyoneDev/commonTaskfi
 }
  
  
-Write-Host "You should now clone https://github.com/CyoneDev/iac-k8s-aks.git"
+Write-Host "You should now `ngit clone https://github.com/CyoneDev/iac-k8s-aks.git`n"
 Write-Host "Go to that directory and run 'task:init:dev'"
  
 
