@@ -1,3 +1,4 @@
+#run with `Invoke-Expression -Command $(Invoke-WebRequest https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/refs/heads/main/bootstrap.ps1)`
 #install scoop
 if(-not (get-command scoop -erroraction silentlycontinue)){
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
