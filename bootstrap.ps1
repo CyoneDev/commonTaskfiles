@@ -22,10 +22,13 @@ task -t https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/refs/heads/ma
 if( -not(get-command dockerd)){
 invoke-expression $(curl https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/refs/heads/main/scripts/install-docker-desktop_win.ps1 | select -expand content)
 }
- 
- 
-Write-Host "You should now `ngit clone https://github.com/CyoneDev/iac-k8s-aks.git`n"
-Write-Host "Go to that directory and run 'task:init:dev'"
+#kind
+if(-not (get-command kind -erroraction silentlycontinue)){scoop install kind}
+#onepass op cli
+task -t https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/main/tools/onepassword/onepassword_windows.yaml install -y
+
+Write-Host "You should now run: `n`tgit clone https://github.com/CyoneDev/iac-k8s-aks.git`nGo to that directory and run`n`ttask kind:init:dev"
+
  
 
 
