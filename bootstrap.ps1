@@ -15,4 +15,6 @@ task -t https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/refs/heads/ma
 #install pwsh 7
 task -t https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/refs/heads/main/installs/pwsh.taskfile.yaml -y install
 #install docker desktop
+if( -not(get-command dockerd)){
 invoke-expression $(curl https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/refs/heads/main/scripts/install-docker-desktop_win.ps1 | select -expand content)
+}
