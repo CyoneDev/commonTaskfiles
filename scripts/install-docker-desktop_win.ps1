@@ -12,7 +12,7 @@ function Download-DockerDesktop {
 # Function to install Docker Desktop
 function Install-DockerDesktop {
     Write-Host "Installing Docker Desktop..."
-    Start-Process -FilePath $installerPath -ArgumentList "/quiet" -Wait
+    Start-Process -FilePath $installerPath -ArgumentList "install --quiet" -Wait
     Write-Host "Installation complete!"
 }
 
