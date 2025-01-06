@@ -1,10 +1,10 @@
 #install scoop
-if(-not (get-command scoop)){
+if(-not (get-command scoop -erroraction silentlycontinue)){
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 }
 #install git via scoop if git not found
-if(-not  (get-command git)){scoop install git}
+if(-not  (get-command git -erroraction silentlycontinue)){scoop install git}
 
 #install task
 if(-not (get-command task)){
@@ -19,7 +19,7 @@ task -t https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/refs/heads/ma
 #install pwsh 7
 task -t https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/refs/heads/main/installs/pwsh.taskfile.yaml -y install
 #install docker desktop
-if( -not(get-command dockerd)){
+if( -not(get-command docker -erroraction silentlycontinue)){
 invoke-expression -command $(invoke-webrequest https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/refs/heads/main/scripts/install-docker-desktop_win.ps1)
 }
 #kind
