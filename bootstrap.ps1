@@ -7,7 +7,7 @@ Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 if(-not  (get-command git -erroraction silentlycontinue)){scoop install git}
 
 #install task
-if(-not (get-command task)){
+if(-not (get-command task -erroraction silentlycontinue)){
 scoop install main/task
 }
 #allow remote task
