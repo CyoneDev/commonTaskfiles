@@ -4,7 +4,6 @@ if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdenti
 {  
   $arguments = '& Set-Item -Path Env:TASK_X_REMOTE_TASKFILES -Value 1;task -t https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/refs/heads/main/installs/pwsh.taskfile.yaml -y install'
   Start-Process powershell -Verb runAs -ArgumentList $arguments -wait
-  Break
 }
 #install scoop
 if(-not (get-command scoop -erroraction silentlycontinue)){
