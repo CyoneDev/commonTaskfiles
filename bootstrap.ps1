@@ -18,7 +18,12 @@ $ENV:TASK_X_REMOTE_TASKFILES=1
 #install helm
 task -t https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/refs/heads/main/installs/helm.taskfile.yaml -y install
 #install pwsh 7
-task -t https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/refs/heads/main/installs/pwsh.taskfile.yaml -y install
+if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))  
+{  
+  $arguments = '& Set-Item -Path Env:TASK_X_REMOTE_TASKFILES -Value 1;task -t https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/refs/heads/main/installs/pwsh.taskfile.yaml -y install'
+  Start-Process powershell -Verb runAs -ArgumentList $arguments -wait
+  Break
+}
 #install docker desktop
 if( -not(get-command docker -erroraction silentlycontinue)){
 invoke-expression -command $(invoke-webrequest https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/refs/heads/main/scripts/install-docker-desktop_win.ps1)
