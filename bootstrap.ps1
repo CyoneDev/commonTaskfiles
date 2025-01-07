@@ -1,10 +1,10 @@
 #run with `Invoke-Expression -Command $(Invoke-WebRequest https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/refs/heads/main/bootstrap.ps1)`
 #install pwsh 7
-if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))  
-{  
-  $arguments = '& Set-Item -Path Env:TASK_X_REMOTE_TASKFILES -Value 1;task -t https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/refs/heads/main/installs/pwsh.taskfile.yaml -y install'
-  Start-Process powershell -Verb runAs -ArgumentList $arguments -wait
+if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
+    $arguments = "& { Set-Item -Path Env:TASK_X_REMOTE_TASKFILES -Value 1; task -t https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/refs/heads/main/installs/pwsh.taskfile.yaml -y install }"
+    Start-Process powershell -Verb runAs -ArgumentList "-Command $arguments" -Wait
 }
+
 #install scoop
 if(-not (get-command scoop -erroraction silentlycontinue)){
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
