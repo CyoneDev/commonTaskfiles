@@ -7,7 +7,8 @@ Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 }
 #install git via scoop if git not found
 if(-not  (get-command git -erroraction silentlycontinue)){scoop install git}
-
+#install gum
+if(-not (get-command gum -erroraction silentlycontinue)){scoop install main/charm-gum}
 #install task
 if(-not (get-command task -erroraction silentlycontinue)){
 scoop install main/task
