@@ -41,4 +41,9 @@ task -t https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/main/tools/on
 scoop install kubectl
 Invoke-Expression -Command $(Invoke-WebRequest https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/refs/heads/main/scripts/Refresh-EnvironmentVariables.ps1)
 
-Write-Host "You should now run: `n`tgit clone https://github.com/CyoneDev/iac-k8s-aks.git`nGo to that directory and run`n`ttask kind:init:dev"
+# Define ANSI color codes
+$DarkGreen = "`e[32m" # Dark green color
+$ResetColor = "`e[0m" # Reset to default color
+
+# Write the message as a single Write-Host command
+Write-Host "$DarkGreen###############`nYou should now reboot`n###############$ResetColor`n`nAfter rebooting:`n`n$DarkGreen         Open Docker Desktop if it was installed for first time`n$ResetColor`From a location with your git repos:`n   Clone the git repo: `n`t$DarkGreen git clone https://github.com/CyoneDev/iac-k8s-aks.git $ResetColor`nGo to that directory and run`n`t$DarkGreen task kind:init:dev $ResetColor"
