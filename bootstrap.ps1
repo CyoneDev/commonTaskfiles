@@ -16,14 +16,10 @@ scoop install main/task
 $ENV:TASK_X_REMOTE_TASKFILES=1
 
 if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
-#install pwsh 7
+#install pwsh 7 and docker desktop within UAC elevated prompt
 if( -not(get-command pwsh -erroraction silentlycontinue)){
-    $arguments = "& { Set-Item -Path Env:TASK_X_REMOTE_TASKFILES -Value 1; task -t https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/refs/heads/main/installs/pwsh.taskfile.yaml -y install }"
+    $arguments = "& { Set-Item -Path Env:TASK_X_REMOTE_TASKFILES -Value 1; task -t https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/refs/heads/main/installs/pwsh.taskfile.yaml -y install ;invoke-expression -command `$(invoke-webrequest https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/refs/heads/main/scripts/install-docker-desktop_win.ps1)}"
     Start-Process powershell -Verb runAs -ArgumentList "-Command $arguments" -Wait
-}
-#install docker desktop
-if( -not(get-command docker -erroraction silentlycontinue)){
-invoke-expression -command $(invoke-webrequest https://raw.githubusercontent.com/CyoneDev/commonTaskfiles/refs/heads/main/scripts/install-docker-desktop_win.ps1)
 }
 }
 
