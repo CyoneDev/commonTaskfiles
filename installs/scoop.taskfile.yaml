@@ -34,6 +34,7 @@ tasks:
       - cmd: "scoop bucket add extras"
     depends_on: ["install-scoop"]
     silent: true
-
+    status:
+    - 'scoop bucket list | grep -q extras'
 
 
